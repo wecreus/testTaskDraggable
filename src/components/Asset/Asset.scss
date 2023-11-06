@@ -1,0 +1,21 @@
+.Asset {
+  resize: horizontal;
+  width: 200px;
+  height: 200px;
+  background-color: #8b1a1a75;
+  overflow: auto;
+
+  min-width: 100px;
+  max-width: 500px;
+  user-select: none;
+}
+
+.DragArea {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    cursor: grab;
+  }
+}

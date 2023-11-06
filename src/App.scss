@@ -18,12 +18,12 @@
 }
 
 .upload {
-  margin: 50px 20px;
+  margin: 20px 20px;
 
   &-button {
     cursor: pointer;
   }
-  
+
   &-url {
     width: 100%;
   }
@@ -32,4 +32,12 @@
     width: 100%;
     display: flex;
   }
+}
+
+.hints {
+  color: grey;
+  padding: 20px;
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
 }
