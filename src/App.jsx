@@ -11,6 +11,10 @@ function App() {
     setLinks([...links, { id: uuidv4(), url: e.target.url.value }]);
   };
 
+  const deleteAsset = (id) => {
+    setLinks([...links.filter((item) => item.id !== id)])
+  };
+
   return (
     <div className="main">
       <form className="upload" onSubmit={upload}>
@@ -34,7 +38,7 @@ function App() {
 
       <div className="canvas-container">
         {links.map((link) => (
-          <Asset {...link} key={link.id} />
+          <Asset {...link} key={link.id} deleteAsset={deleteAsset} />
         ))}
       </div>
     </div>

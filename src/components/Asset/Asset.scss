@@ -1,21 +1,57 @@
 .Asset {
   resize: horizontal;
-  width: 200px;
-  height: 200px;
-  background-color: #8b1a1a75;
+  background-color: #00000075;
   overflow: auto;
+  width: 300px;
 
-  min-width: 100px;
-  max-width: 500px;
   user-select: none;
-}
-
-.DragArea {
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
 
-  &:hover {
-    cursor: grab;
+  &__delete {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    cursor: pointer;
+    top: 2px;
+    right: 2px;
+    background: rgba(255, 255, 255, 0.425);
+    z-index: 21;
+    border-radius: 5px;
+    padding: 2px;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+
+  &__data {
+    position: absolute;
+    height: 15px;
+    bottom: -2px;
+    background-color: black;
+    z-index: 20;
+    font-size: 10px;
+
+  }
+
+  &__DragArea {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.26);
+    width: 100%;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.452);
+    padding: 0 5px;
+    transition: all 200ms ease-in-out;
+    z-index: 20;
+
+    &:hover {
+      cursor: grab;
+      background-color: rgba(0, 0, 0, 0.658);
+    }
   }
 }
