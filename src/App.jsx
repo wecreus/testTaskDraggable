@@ -5,6 +5,11 @@ import "./App.scss";
 
 function App() {
   const [links, setLinks] = useState([]);
+  const [error, setError] = useState({
+    name: null,
+    assetName: null,
+    shown: false
+  });
 
   const upload = (e) => {
     e.preventDefault();
@@ -12,7 +17,14 @@ function App() {
   };
 
   const deleteAsset = (id) => {
-    setLinks([...links.filter((item) => item.id !== id)])
+    setLinks([...links.filter((item) => item.id !== id)]);
+  };
+
+  const updateErrors = (errorName, assetName) => {
+    setError({...error, name: errorName, assetName: assetName, shown: true});
+    setTimeout(() => {
+      setError({...error, name: errorName, assetName: assetName, shown: false})
+    }, 5000);
   };
 
   return (
@@ -30,7 +42,7 @@ function App() {
           <input type="submit" value="Load" className="upload-button" />
         </div>
       </form>
-
+      <div className={error.shown ? "error shown" : "error"}>{error.name} on <span className="error__asset">{error.assetName}</span></div>
       <div className="hints">
         <span>Drag assets by their name to reposition it</span>
         <span>Resize assets by dragging their bottom right corner</span>
@@ -38,7 +50,12 @@ function App() {
 
       <div className="canvas-container">
         {links.map((link) => (
-          <Asset {...link} key={link.id} deleteAsset={deleteAsset} />
+          <Asset
+            {...link}
+            key={link.id}
+            deleteAsset={deleteAsset}
+            updateErrors={updateErrors}
+          />
         ))}
       </div>
     </div>

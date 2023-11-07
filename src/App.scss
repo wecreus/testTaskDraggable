@@ -18,7 +18,7 @@
 }
 
 .upload {
-  margin: 20px 20px;
+  margin: 20px 20px 10px 20px;
 
   &-button {
     cursor: pointer;
@@ -36,8 +36,31 @@
 
 .hints {
   color: grey;
-  padding: 20px;
+  padding: 10px 20px;
   font-style: italic;
   display: flex;
   flex-direction: column;
+}
+
+.error {
+  opacity: 0;
+  height: 35px;
+  transition: all 250ms ease-in-out;
+  margin: 0 auto;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.596);
+  font-weight: bolder;
+  border: 1px solid rgb(136, 60, 60);
+  background-color: rgb(44, 44, 44);
+  border-radius: 15px;
+  padding: 5px 10px;
+
+  &__asset {
+    font-style: italic;
+    color:rgb(136, 60, 60)
+  }
+
+  &.shown {
+    opacity: 1;
+  }
 }

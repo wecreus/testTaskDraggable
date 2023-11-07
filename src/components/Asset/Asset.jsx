@@ -3,7 +3,7 @@ import DeleteIcon from "./delete.svg";
 import Draggable from "react-draggable";
 import "./Asset.scss";
 
-function Asset({ id, url, deleteAsset }) {
+function Asset({ id, url, deleteAsset, updateErrors }) {
   const ref = useRef(null);
   const [asset, setAsset] = useState({
     id: id,
@@ -19,15 +19,20 @@ function Asset({ id, url, deleteAsset }) {
 
   useEffect(() => {
     async function getData() {
-      const response = await fetch(asset.url);
-      const data = await response;
-      setAsset({ ...asset, response: data });
+      try {
+        const response = await fetch(asset.url);
+        const data = await response;
+        setAsset({ ...asset, response: data });
+      } catch (err) {
+        
+        updateErrors(err.message, asset.name);
+      }
     }
 
     getData();
   }, []);
 
-  const updatePosition = () => { 
+  const updatePosition = () => {
     if (!ref.current) return;
     const position = ref.current.getBoundingClientRect();
     setAsset({
@@ -35,7 +40,7 @@ function Asset({ id, url, deleteAsset }) {
       width: Math.round(position.width),
       height: Math.round(position.height),
       x: Math.round(position.x),
-      y: Math.round(position.y)
+      y: Math.round(position.y),
     });
   };
 
@@ -51,7 +56,11 @@ function Asset({ id, url, deleteAsset }) {
 
   return (
     asset.response && (
-      <Draggable bounds="parent" handle=".Asset__DragArea" onDrag={updatePosition}>
+      <Draggable
+        bounds="parent"
+        handle=".Asset__DragArea"
+        onDrag={updatePosition}
+      >
         <div className="Asset" ref={ref}>
           <img
             src={DeleteIcon}
@@ -59,7 +68,9 @@ function Asset({ id, url, deleteAsset }) {
             onClick={() => deleteAsset(asset.id)}
           />
           <div className="Asset__DragArea">{asset.name || "Asset"}</div>
-          <div className="Asset__data">X {asset.x} | Y {asset.y} | W {asset.width}px | H {asset.height}px</div>
+          <div className="Asset__data">
+            X {asset.x} | Y {asset.y} | W {asset.width}px | H {asset.height}px
+          </div>
           {asset.type === "image" ? (
             <img src={asset.url} onLoad={updatePosition} />
           ) : (
