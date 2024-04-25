@@ -1,5 +1,5 @@
 # Draggable test task
-`npm run i`
+`npm i`
 
 `npm run dev`
 
